@@ -1,19 +1,25 @@
 #include <iostream>
 #include "../include/Date.h"
+#include "../include/DateList.h"
 
 int main()
 {
-    Date date(2023, 10, 3);
+    // Create a Date object with start and end dates
+    Date startDate(1950, 1, 1);
+    Date endDate(2023, 10, 5);
 
-    std::cout << "Year: " << date.getYear() << std::endl;
-    std::cout << "Month: " << date.getMonth() << std::endl;
-    std::cout << "Day: " << date.getDay() << std::endl;
+    // Create an instance of DateList
+    DateList dateList(startDate, endDate);
 
-    date.setYear(2024);
-    date.setMonth(1);
-    date.setDay(1);
+    // Get a list of dates from DateList
+    std::vector<Date> dates = dateList.getDates();
 
-    std::cout << "Updated Date - Year: " << date.getYear() << ", Month: " << date.getMonth() << ", Day: " << date.getDay() << std::endl;
+    // Displays a list of retrieved dates
+    for (const auto &date : dates)
+    {
+        std::cout << date.toJson() << std::endl;
+    }
 
+    dateList.writeDatesToJsonFiles();
     return 0;
 }
